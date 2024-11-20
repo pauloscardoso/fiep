@@ -94,19 +94,19 @@ export default function Home() {
           <div className="hidden md:flex items-center gap-8">
             <Link
               href="#doacao"
-              className="text-[#2B5AA9] text-sm md:text-base hover:text-[#75a5ee] transition-colors"
+              className="text-[#2B5AA9] text-sm font-bold md:text-base hover:text-[#75a5ee] transition-colors"
             >
               FAÇA A SUA DOAÇÃO
             </Link>
             <Link
               href="#campanha"
-              className="text-[#2B5AA9] text-sm md:text-base hover:text-[#75a5ee] transition-colors"
+              className="text-[#2B5AA9] text-sm font-bold md:text-base hover:text-[#75a5ee] transition-colors"
             >
               CAMPANHA
             </Link>
             <Link
               href="#compartilhe"
-              className="text-[#2B5AA9] text-sm md:text-base hover:text-[#75a5ee] transition-colors"
+              className="text-[#2B5AA9] text-sm font-bold md:text-base hover:text-[#75a5ee] transition-colors"
             >
               COMPARTILHE
             </Link>
@@ -124,16 +124,17 @@ export default function Home() {
             <Image
               src={backArrow}
               alt="Sistema FIEP Logo"
-              width={30}
-              height={30}
+              width={26}
+              // height={20}
               className="filter brightness-0 invert"
+              onClick={() => setMenuOpen(false)}
             />
             <Image
               src={logo}
-              width={80}
+              width={100}
               height={80}
               alt="Sistema FIEP Logo"
-              className="filter brightness-0 invert"
+              className="filter brightness-0 invert mt-2"
             />
             <button onClick={() => setMenuOpen(false)}>
               <Image
@@ -148,7 +149,7 @@ export default function Home() {
           <div className="border-b border-[#75a5ee] py-1" />
           <a
             href="#doacao"
-            className="text-white text-base pt-1"
+            className="text-white text-base font-bold pt-1"
             onClick={() => setMenuOpen(false)}
           >
             Faça a sua doação
@@ -156,7 +157,7 @@ export default function Home() {
           </a>
           <a
             href="#campanha"
-            className="text-white text-base pt-1"
+            className="text-white text-base font-bold pt-1"
             onClick={() => setMenuOpen(false)}
           >
             Campanha
@@ -164,7 +165,7 @@ export default function Home() {
           </a>
           <a
             href="#compartilhe"
-            className="text-white text-base pt-1"
+            className="text-white text-base font-bold pt-1"
             onClick={() => setMenuOpen(false)}
           >
             Compartilhe
