@@ -1,115 +1,288 @@
+import * as React from "react";
 import Image from "next/image";
-import localFont from "next/font/local";
-
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
-});
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
-});
+import Link from "next/link";
+import {
+  donate,
+  logo,
+  qrCode,
+  sectionOne,
+  sectionOneOne,
+  sectionTwo,
+  sectionTwoTwo,
+  sectionTwoThree,
+  sectionThree,
+  mobileSection1,
+  mobileSection2,
+  mobileSection3,
+  mobileSection4,
+  mobileSection5,
+} from "@/utils/constants/images";
+import { backArrow, close } from "@/utils/constants/icons";
 
 export default function Home() {
-  return (
-    <div
-      className={`${geistSans.variable} ${geistMono.variable} grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]`}
-    >
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/pages/index.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+  const [menuOpen, setMenuOpen] = React.useState(false);
+  const [isMobile, setIsMobile] = React.useState(false);
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
+  React.useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    handleResize();
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+  return (
+    <div className="min-h-screen bg-white w-full">
+      <style jsx global>{`
+        html {
+          scroll-behavior: smooth;
+        }
+      `}</style>
+
+      <header className="container mx-auto px-4 sm:px-6 md:px-10 lg:px-56 pt-6 md:pt-10">
+        <nav className="flex items-center justify-between">
+          <Image
+            src={logo}
+            alt="Sistema FIEP Logo"
+            className="w-auto md:h-12 h-auto"
+          />
+
+          <div className="md:hidden">
+            <button
+              onClick={() => setMenuOpen(!menuOpen)}
+              className="text-[#2B5AA9] focus:outline-none"
+            >
+              {menuOpen ? (
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-6 w-6"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                </svg>
+              ) : (
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-6 w-6"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M4 6h16M4 12h16M4 18h16"
+                  />
+                </svg>
+              )}
+            </button>
+          </div>
+
+          <div className="hidden md:flex items-center gap-8">
+            <Link
+              href="#doacao"
+              className="text-[#2B5AA9] text-sm md:text-base hover:text-[#75a5ee] transition-colors"
+            >
+              FAÇA A SUA DOAÇÃO
+            </Link>
+            <Link
+              href="#campanha"
+              className="text-[#2B5AA9] text-sm md:text-base hover:text-[#75a5ee] transition-colors"
+            >
+              CAMPANHA
+            </Link>
+            <Link
+              href="#compartilhe"
+              className="text-[#2B5AA9] text-sm md:text-base hover:text-[#75a5ee] transition-colors"
+            >
+              COMPARTILHE
+            </Link>
+          </div>
+        </nav>
+      </header>
+
+      <div
+        className={`fixed top-0 left-0 h-full w-64 bg-[#014899] shadow-lg z-50 transform ${
+          menuOpen ? "translate-x-0" : "-translate-x-full"
+        } transition-transform duration-300 ease-in-out`}
+      >
+        <div className="p-4 flex flex-col space-y-4">
+          <div className="flex justify-between">
             <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
+              src={backArrow}
+              alt="Sistema FIEP Logo"
+              width={30}
+              height={30}
+              className="filter brightness-0 invert"
             />
-            Deploy now
+            <Image
+              src={logo}
+              width={80}
+              height={80}
+              alt="Sistema FIEP Logo"
+              className="filter brightness-0 invert"
+            />
+            <button onClick={() => setMenuOpen(false)}>
+              <Image
+                src={close}
+                alt="Sistema FIEP Logo"
+                width={20}
+                height={20}
+                className="filter brightness-0 invert"
+              />
+            </button>
+          </div>
+          <div className="border-b border-[#75a5ee] py-1" />
+          <a
+            href="#doacao"
+            className="text-white text-base pt-1"
+            onClick={() => setMenuOpen(false)}
+          >
+            Faça a sua doação
+            <div className="border-b border-[#1d355d] mt-2" />
           </a>
           <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+            href="#campanha"
+            className="text-white text-base pt-1"
+            onClick={() => setMenuOpen(false)}
           >
-            Read our docs
+            Campanha
+            <div className="border-b border-[#1d355d] mt-2" />
+          </a>
+          <a
+            href="#compartilhe"
+            className="text-white text-base pt-1"
+            onClick={() => setMenuOpen(false)}
+          >
+            Compartilhe
+            <div className="border-b border-[#1d355d] mt-2" />
           </a>
         </div>
+      </div>
+
+      {menuOpen && (
+        <div
+          className="fixed inset-0 bg-black bg-opacity-50 z-40"
+          onClick={() => setMenuOpen(false)}
+        />
+      )}
+
+      <main className="py-6 sm:py-8 md:py-12 w-full flex flex-col items-center">
+        <section id="doacao" className="w-full flex flex-col items-center">
+          {isMobile ? (
+            <>
+              <Image src={mobileSection1} alt="Ilustração de pessoas unidas" />
+              <Image
+                src={qrCode}
+                alt="QR Code"
+                width={340}
+                className="-mt-14"
+              />
+            </>
+          ) : (
+            <>
+              <Image
+                src={sectionOne}
+                alt="Ilustração de pessoas unidas"
+                className="w-full max-w-[90%] md:max-w-[70%] h-auto"
+                priority
+              />
+              <div className="relative w-full max-w-[90%] md:max-w-[70%]">
+                <Image
+                  src={qrCode}
+                  alt="QR Code"
+                  className="absolute top-[-50px] sm:top-[-100px] right-[10%] sm:right-[20%] w-[30vw] sm:w-[20vw] md:w-[15vw] h-auto"
+                />
+              </div>
+            </>
+          )}
+        </section>
+        <section id="campanha" className="w-full flex flex-col items-center">
+          {isMobile ? (
+            <Image
+              src={mobileSection2}
+              alt="Texto que descreve a necessidade da doação"
+              className="mt-10"
+            />
+          ) : (
+            <>
+              <Image
+                src={sectionOneOne}
+                alt="Texto que descreve a necessidade da doação"
+                className="w-full max-w-[90%] md:max-w-[70%] h-auto"
+              />
+              <div className="relative w-full max-w-[90%] md:max-w-[70%]">
+                <Image
+                  src={donate}
+                  alt="Quatro imagens com pessoas reais em atividade doação"
+                  className="absolute top-[20px] sm:top-[40px] right-[10%] sm:right-[20%] w-[35vw] sm:w-[24vw] md:w-[20vw] h-auto"
+                />
+              </div>
+            </>
+          )}
+
+          {isMobile ? (
+            <>
+              <Image
+                src={mobileSection3}
+                alt="Quatro imagens com pessoas reais em atividade doação"
+                className="mt-10"
+              />
+              <Image
+                src={mobileSection4}
+                alt="Informações sobre como doar para a campanha"
+                className="mt-10"
+              />
+            </>
+          ) : (
+            <>
+              <Image
+                src={sectionTwo}
+                alt="Texto descrevendo que a FIEP está junto desde o início"
+                className="w-full max-w-[90%] md:max-w-[70%] h-auto"
+              />
+              <Image
+                src={sectionTwoTwo}
+                alt="Texto descrevendo as prioridades da campanha"
+                className="w-full max-w-[90%] md:max-w-[70%] h-auto"
+              />
+              <Image
+                src={sectionTwoThree}
+                alt="Imagem demonstrando doações reais que chegam ao total de mais de 36 toneladas"
+                className="w-full max-w-[90%] md:max-w-[70%] h-auto"
+                priority
+              />
+            </>
+          )}
+        </section>
+        <section id="compartilhe" className="w-full flex flex-col items-center">
+          {isMobile ? (
+            <Image
+              src={mobileSection5}
+              alt="Informações de como compartilhar a campanha"
+            />
+          ) : (
+            <Image
+              src={sectionThree}
+              alt="Informações de como compartilhar a campanha"
+              className="w-full max-w-[90%] md:max-w-[70%] h-auto"
+            />
+          )}
+        </section>
       </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
     </div>
   );
 }
